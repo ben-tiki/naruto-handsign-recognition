@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/modal.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/konoha.png">
+<title>Naruto Hand Recognition</title>
+
+<body>
+
+    <div id="content-container">
+
+        <!-- BACKGROUND -->
+        <div id="background"></div>
+
+        <!-- CAMERA & LABELS -->
+        <div id="webcam-container"></div>
+        <div id="loading-circle"></div>
+        <div id="label-container"></div>
+        <div id="finished-jutsu-container"></div>
+        <div id="past-labels"></div>
+
+        <!-- MODAL -->
+        <button id="more-info-button">+</button>
+        <div id="info-modal" class="modal">
+            <div class="info-modal-content">
+                <span class="close">&times;</span>
+                <div id="jutsus-container">
+                    <h2>Jutsus Collection</h2>
+                    <hr>
+                </div>
+                <br>
+                <div id="handsigns-list"></div>
+
+                <div><span id="hint">Hint: &nbsp</span>Position your hands at the center of the screen for better
+                    performance. Don't make any gestures or press the "c" key, to reset the past handsigns.</div>
+                <br>
+                <h2>Justu Recognition Delay</h2>
+                <hr>
+                <div id="slider-container">
+                    <input type="range" id="threshold-slider">
+                    <p>Value:&nbsp;&nbsp;<span id="threshold-value"></span></p>
+                </div>
+                <h2>Handsigns</h2>
+                <hr>
+                <div id="handsigns-container">
+                    <img id="handsigns-image" src="assets/img/handsigns.png" alt="all-handsigns">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="assets/js/jutsuManager.js"></script>
+    <script src="assets/js/handRecognition.js"></script>
+    <script src="assets/js/modal.js"></script>
+
+    <script>
+
+        // initialize app
+        init();
+
+        // check for page load
+        window.onload = function () {
+            document.body.className += " loaded";
+        };
+
+    </script>
+</body>
+
+</html>

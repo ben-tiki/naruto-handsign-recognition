@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    user-select: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#background:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    content: ' ';
+    border-top: 100vh solid #ff9432;
+    border-right: 100vw solid #424652;
+}
+
+#webcam-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    border-radius: 90%;
+    overflow: hidden;
+    height: 60%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 2s ease-in;
+}
+
+#loading-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    height: 65%;
+}
+
+#label-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 2.5em;
+    text-align: center;
+    z-index: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+#finished-jutsu-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.5em;
+    text-align: center;
+    z-index: 2;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    /* visibility: hidden; */
+}
+
+body.loaded #webcam-container {
+    opacity: 1;
+}
+
+#past-labels {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
