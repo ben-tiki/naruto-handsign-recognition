@@ -2,7 +2,7 @@
 This project uses TensorFlow.js and Google's Teachable Machine to recognize up to 9 unique hand gestures in real-time, allowing users to perform different "jutsu" (techniques) and trigger different events. 
 
 # Demo
-https://user-images.githubusercontent.com/101474762/221081318-33e8c977-7346-4ab5-92b2-d69f02b4513d.mp4
+https://user-images.githubusercontent.com/101474762/221086680-e21feaae-ec04-4f11-83ef-4acb06119c54.mp4
 
 # Usage
 You can try the live demo [here](https://ben-tiki.github.io/naruto-handseal-recognition/) or clone this repository and open the `index.html` file in your browser. Under the "+" button, you can check all supported gesture combinations or jutsu.
