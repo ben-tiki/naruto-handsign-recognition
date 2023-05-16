@@ -1,35 +1,37 @@
-# Hand Gesture Recognition using TensorFlow.js and Teachable Machine
-This project uses TensorFlow.js and Google's Teachable Machine to recognize up to 9 unique hand gestures in real-time, allowing users to perform different "jutsu" (techniques) and trigger different events. 
+# Hand Gesture Recognition with TensorFlow.js, Teachable Machine, and MediaPipe
+This project is a real-time hand gesture recognition system that identifies and classifies nine distinct hand gestures. It utilizes TensorFlow.js for implementing machine learning in JavaScript, Teachable Machine for training the recognition model, and MediaPipe for hand detection in the input frames. The gestures and their associated actions are inspired by the anime "Naruto".
+
+# System Architecture
+The architecture of this project consists of two major components:
+
+1. **Hand Detection**: Mediapipe is used to detect hand landmarks in the input frames. The landmarks are then used to crop the image and isolate the hand from the background.
+2. **Gesture Recognition**: Once the hand is detected and the image cropped, it's then fed to a machine learning model trained via Teachable Machine. This model classifies the gesture into one of the nine categories.
 
 # Demo
 https://user-images.githubusercontent.com/101474762/221086680-e21feaae-ec04-4f11-83ef-4acb06119c54.mp4
 
-# Usage
-You can try the live demo [here](https://ben-tiki.github.io/naruto-handseal-recognition/) or clone this repository and open the `index.html` file in your browser. Under the "+" button, you can check all supported gesture combinations or jutsu.
+# Getting Started
+You can try the live demo of the app [here](https://ben-tiki.github.io/naruto-handseal-recognition/) or clone this repository and open the `index.html` file in your browser. In `assets/jutsus.json`, you can see or edit the combinations of each jutsu.
 
-# Dataset
-The dataset used for this project was created by the me, consisting of 9 classes of hand gestures, each with 900 images taken with a webcam under varying lighting, people, and backgrounds.
+# Dataset Information
+The project is trained on a custom dataset, created by the author, which includes 9 different classes of hand gestures. Each class is represented by 500 images captured via a webcam under varying conditions of lighting, individual hand shapes, and backgrounds.
 
 ### Limitations of the dataset:
-The model may not generalize well to new data, which can be improved by increasing the training dataset size and using data augmentation techniques. For best results, position your hands at the center of the circle and keep the background as simple as possible.
+The model's performance may vary with new data due to the limitations of the current dataset. Improvements can be achieved by increasing the dataset size and diversity of the images.
 
 # Model 
 The model can be found in the `assets/model` folder. 
 
-The paramters used to train the model are as follows:
-
-- Number of epochs: 200
-- Batch size: 64
-- Learning rate: 0.001
-
-# Gesture Examples
+# Gesture Reference
 <p align="center">
   <img src="assets/img/handsigns.png" width="600" height="700" alt="Hand Seals"/>
 </p>
 
-The 9 hand gestures are from the anime "Naruto", where characters perform hand seals to execute jutsu or special abilities. Each gesture has a unique meaning and significance in the anime.
+The nine hand gestures used in this project are inspired by the anime "Naruto". In the series, characters perform these seals to use their special abilities or "jutsu". Each gesture has a unique meaning in the context of the anime.
 
-# Built with
+# Tech Stack
 - [TensorFlow.js](https://www.tensorflow.org/js) - A JavaScript library for training and deploying machine learning models in the browser and on Node.js
 
 - [Teachable Machine](https://teachablemachine.withgoogle.com/) - A web tool for training and deploying machine learning models in the browser.
+
+- [Mediapipe](https://developers.google.com/mediapipe) - A cross-platform framework for building multimodal applied machine learning pipelines.

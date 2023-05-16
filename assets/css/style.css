@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900&display=swap');
 
+:root {
+    --color-primary: #ff9432;
+    --color-secondary: #424652;
+    --color-text: #fff;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     user-select: none;
@@ -9,37 +15,31 @@ body {
 }
 
 #background:after {
+    content: ' ';
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
-    content: ' ';
-    border-top: 100vh solid #ff9432;
-    border-right: 100vw solid #424652;
+    border-top: 100vh solid var(--color-primary);
+    border-right: 100vw solid var(--color-secondary);
+}
+
+#image-canvas,
+#webcam-container,
+#loading-circle,
+#finished-jutsu-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #webcam-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
-    border-radius: 90%;
-    overflow: hidden;
-    height: 60%;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 2s ease-in;
-}
-
-#loading-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 50%;
     overflow: hidden;
-    height: 65%;
+    opacity: 0;
+    transition: opacity 1s ease-in;
 }
 
 #label-container {
@@ -47,7 +47,7 @@ body {
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: var(--color-text);
     font-size: 2.5em;
     text-align: center;
     z-index: 1;
@@ -55,22 +55,9 @@ body {
     text-transform: uppercase;
 }
 
-#finished-jutsu-container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 1.5em;
-    text-align: center;
-    z-index: 2;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    /* visibility: hidden; */
-}
-
-body.loaded #webcam-container {
-    opacity: 1;
+#loading-circle {
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 #past-labels {
@@ -78,9 +65,18 @@ body.loaded #webcam-container {
     top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: var(--color-text);
     font-size: 1.5em;
     display: flex;
     flex-direction: row;
     gap: 0.5em;
+}
+
+#finished-jutsu-container {
+    color: var(--color-text);
+    font-size: 1.5em;
+    text-align: center;
+    z-index: 2;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }

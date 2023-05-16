@@ -1,0 +1,6 @@
+# Prettier plugin
+.prettierignore
+.prettierrc
+
+# IDE / Editor
+.vscode/
