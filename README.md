@@ -8,7 +8,7 @@ The architecture of this project consists of two major components:
 2. **Gesture Recognition**: Once the hand is detected and the image cropped, it's then fed to a machine learning model trained via Teachable Machine. This model classifies the gesture into one of the nine categories.
 
 # Demo
-https://User-images.githubusercontent.com/101474762/221086680-e21feaae-ec04-4f11-83ef-4acb06119c54.mp4
+https://user-images.githubusercontent.com/101474762/221086680-e21feaae-ec04-4f11-83ef-4acb06119c54.mp4
 
 # Getting Started
 You can try the live demo of the app [here](https://Ben-tiki.github.io/naruto-handseal-recognition/) or clone this repository and open the `index.html` file in your browser. In `assets/jutsus.json`, you can see or edit the combinations of each jutsu.
