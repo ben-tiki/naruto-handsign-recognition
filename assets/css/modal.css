@@ -61,6 +61,10 @@
     font-weight: bold;
 }
 
+#jutsu-combinations {
+    font-size: 0.9em;
+}
+
 #hint {
     font-weight: bold;
     font-style: italic;

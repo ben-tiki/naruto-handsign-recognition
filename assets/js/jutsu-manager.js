@@ -1,26 +1,38 @@
-// predictions variables
+// VARIABLE DECLARATIONS
+// ----------------------------------------
 let predictions = [];
 export let threshold = 5;
 let predictionCounter = 0;
 let previousPrediction;
 let jutsus;
 
-// media paths
+// Media paths
 const JUTSUS_JSON_PATH = 'assets/jutsus.json';
 const JUTSU_AUDIO_PATH = 'assets/audio/jutsu.mp3';
 
+
+// EXPORTS
+// ----------------------------------------
+/**
+ * Function to load the hand combinations from the jutsus.json file
+ */
 export async function loadJutsus() {
   try {
     const response = await fetch(JUTSUS_JSON_PATH);
     const data = await response.json();
     jutsus = data;
+    return jutsus;
   } catch (error) {
     console.error('Error fetching jutsus:', error);
   }
 };
 
+/**
+ * Function to manage the predictions from the Teachable Machine model
+ * Checks if the prediction is the same as the previous one to make sure it's not a duplicate
+ * Adds a threshold to slow down the predictions, to wait for hand movement to be completed 
+ */
 export function manageJutsuPrediction(finalPrediction, labelContainer, loadingCircle, pastLabels, jutsusContainer) {
-  // check if prediction is the same as the previous one, to avoid duplicates
   if (finalPrediction === previousPrediction) {
     predictionCounter++;
     if (predictionCounter >= threshold && predictions[predictions.length - 1] !== finalPrediction) {
@@ -34,6 +46,9 @@ export function manageJutsuPrediction(finalPrediction, labelContainer, loadingCi
   }
 };
 
+/**
+ * Function to reset the predictions and UI components when no hands are detected
+ */
 export function resetPredictions(labelContainer, loadingCircle, pastLabels) {
   predictions = [];
   predictionCounter = 0;
@@ -45,8 +60,10 @@ export function resetPredictions(labelContainer, loadingCircle, pastLabels) {
   pastLabels.innerHTML = '';
 };
 
+/**
+ * Function to update the loading circle UI component, which shows the progress of the prediction
+ */
 export function updateLoadingCircle(loadingCircle) {
-  // UI components
   const progress = (predictionCounter / threshold) * 360;
 
   const emptyColor = '#fffdf1';
@@ -54,6 +71,9 @@ export function updateLoadingCircle(loadingCircle) {
   loadingCircle.style.width = loadingCircle.offsetHeight + 'px';
 };
 
+/**
+ * Function to update the past labels UI component, which shows the previous predictions
+ */
 export function updatePastLabels(pastLabels) {
   pastLabels.innerHTML = '';
   predictions.forEach(prediction => {
@@ -65,6 +85,31 @@ export function updatePastLabels(pastLabels) {
   });
 };
 
+/**
+ * Function to write the jutsu combinations from the jutsus.json file into the modal
+ */
+export function writeJutsusIntoModal(jutsus, modalBody) {
+  const jutsuKeys = Object.keys(jutsus);
+
+  jutsuKeys.forEach(jutsu => {
+    const jutsuElement = document.createElement('p');
+    jutsuElement.innerHTML = `<strong>${jutsu}:</strong> <em>${jutsus[jutsu].join(', ')}</em>`;
+    modalBody.appendChild(jutsuElement);
+  });
+};
+
+/**
+ * Function to set the threshold value of the predictions
+ */
+export function setThreshold(value) {
+  threshold = value;
+};
+
+// HELPER FUNCTIONS
+// ----------------------------------------
+/**
+ * Function to check if the current predictions match any of the jutsu combinations in the jutsus.json file
+ */
 function checkJutsuMatch(jutsusContainer, labelContainer, loadingCircle, pastLabels) {
   const jutsuKeys = Object.keys(jutsus);
 
@@ -76,17 +121,27 @@ function checkJutsuMatch(jutsusContainer, labelContainer, loadingCircle, pastLab
   });
 
   if (matchedJutsu) {
-    playSound();
+    playJutsuSound();
     showJutsuName(matchedJutsu, jutsusContainer, labelContainer, loadingCircle, pastLabels);
   }
 };
 
-function playSound() {
+
+/**
+ * Function to play the jutsu sound when a jutsu is matched
+ */
+function playJutsuSound() {
   const audio = new Audio(JUTSU_AUDIO_PATH);
   audio.play();
 };
 
+/**
+ * Function to show the jutsu name when a jutsu is matched and apply effect to UI components
+ */
 function showJutsuName(jutsuName, jutsusContainer, labelContainer, loadingCircle, pastLabels) {
+
+  const effectDuration = 3000;
+
   jutsusContainer.innerHTML = jutsuName;
   jutsusContainer.style.visibility = 'visible';
 
@@ -100,9 +155,5 @@ function showJutsuName(jutsuName, jutsusContainer, labelContainer, loadingCircle
     labelContainer.style.visibility = 'visible';
     loadingCircle.style.visibility = 'visible';
     pastLabels.style.visibility = 'visible';
-  }, 3000);
-};
-
-export function setThreshold(value) {
-  threshold = value;
+  }, effectDuration);
 };

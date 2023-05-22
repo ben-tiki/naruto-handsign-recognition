@@ -1,43 +1,44 @@
-// load the model and metadata from URL
-const teachableMachineURL = '/assets/models/teachable-machine/';
-let teachablemachineModel;
-let maxPredictions;
+// Specify the base path of the model and metadata
+const TEACHABLE_MACHINE_URL = './assets/models/teachable-machine/';
+let teachableMachineModel;
+let totalModelClasses;
 
+/**
+ * Function to load the Teachable Machine Model
+ */
 export async function loadTeachableMachineModel() {
-  const modelURL = teachableMachineURL + 'model.json';
-  const metadataURL = teachableMachineURL + 'metadata.json';
+  try {
+    const modelURL = `${TEACHABLE_MACHINE_URL}model.json`;
+    const metadataURL = `${TEACHABLE_MACHINE_URL}metadata.json`;
 
-  teachablemachineModel = await tmImage.load(modelURL, metadataURL);
-  maxPredictions = teachablemachineModel.getTotalClasses();
-  return maxPredictions;
-};
+    teachableMachineModel = await tmImage.load(modelURL, metadataURL);
+    totalModelClasses = teachableMachineModel.getTotalClasses();
 
-export async function predictTeachableMachineModel(croppedCanvas) {
-  return teachablemachineModel
-    .predict(croppedCanvas)
-    .then((predictions) => {
-      
-      // get the highest probability prediction
-      const maxProbabilityIndex = getHighestProbability(predictions);
-
-      // get the label of max probability
-      const highestProbabilityLabel = predictions[maxProbabilityIndex].className;
-
-      return highestProbabilityLabel;
-    })
-    .catch((error) => {
-      console.error('Error predicting from teachable machine model:', error);
-    });
-};
-
-function getHighestProbability(predictions) {
-  let maxProbability = 0;
-  let maxProbabilityIndex = 0;
-  for (let i = 0; i < maxPredictions; i++) {
-    if (predictions[i].probability > maxProbability) {
-      maxProbability = predictions[i].probability;
-      maxProbabilityIndex = i;
-    }
+    return totalModelClasses;
+  } catch (error) {
+    console.error('Error loading the Teachable Machine model:', error);
   }
-  return maxProbabilityIndex;
+};
+
+/**
+ * Function that predicts the cropped and processed canvas using the Teachable Machine Model
+ */
+export async function predictTeachableMachineModel(croppedCanvas) {
+  try {
+    const predictions = await teachableMachineModel.predict(croppedCanvas);
+    const highestProbabilityPrediction = getHighestProbabilityPrediction(predictions);
+
+    return highestProbabilityPrediction.className;
+  } catch (error) {
+    console.error('Error predicting from Teachable Machine model:', error);
+  }
+};
+
+/**
+ * Function to get the prediction with the highest probability
+ */
+function getHighestProbabilityPrediction(predictions) {
+  return predictions.reduce((maxPrediction, currentPrediction) =>
+    currentPrediction.probability > maxPrediction.probability ? currentPrediction : maxPrediction
+  );
 };

@@ -1,42 +1,53 @@
 import { threshold, setThreshold } from "./jutsu-manager.js";
 
-const modal = document.getElementById("info-modal");
-const btn = document.getElementById("more-info-button");
-const span = document.getElementsByClassName("close")[0];
+// CONSTANTS
+// ----------------------------------------
+const minThreshold = 1;
+const maxThreshold = 100;
 
-// Event listeners
-btn.addEventListener("click", showModal);
-span.addEventListener("click", hideModal);
-window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        hideModal();
-    }
-});
+// DOM elements
+// ----------------------------------------
+const moreInfoModal = document.getElementById("info-modal");
+const moreInfoButton = document.getElementById("more-info-button");
+const modalCloseButton = document.getElementsByClassName("close")[0];
+const thresholdSlider = document.getElementById("threshold-slider");
+const thresholdValue = document.getElementById("threshold-value")
 
+export const jutsuCombinationsSpan = document.getElementById("jutsu-combinations");
+
+// FUNCTIONS
+// ----------------------------------------
 function showModal() {
-    modal.style.display = "block";
+    moreInfoModal.style.display = "block";
 };
 
 function hideModal() {
-    modal.style.display = "none";
+    moreInfoModal.style.display = "none";
 };
 
-// Change delayBetweenPredictions with a slider
-const slider = document.getElementById("threshold-slider");
-const output = document.getElementById("threshold-value");
-
-initializeSlider();
-
-slider.addEventListener("input", handleSliderInput);
-
 function initializeSlider() {
-    slider.value = threshold;
-    output.innerHTML = slider.value;
-    slider.min = 1;
-    slider.max = 100;
+    thresholdSlider.value = threshold;
+    thresholdValue.innerHTML = thresholdSlider.value;
+    thresholdSlider.min = minThreshold;
+    thresholdSlider.max = maxThreshold;
 };
 
 function handleSliderInput() {
-    output.innerHTML = this.value;
+    thresholdValue.innerHTML = this.value;
     setThreshold(this.value);
 };
+
+/// EVENT LISTENERS
+// ----------------------------------------
+moreInfoButton.addEventListener("click", showModal);
+modalCloseButton.addEventListener("click", hideModal);
+window.addEventListener("click", (event) => {
+    if (event.target === moreInfoModal) {
+        hideModal();
+    }
+});
+thresholdSlider.addEventListener("input", handleSliderInput);
+
+// INITIALIZATION
+// ----------------------------------------
+initializeSlider();
