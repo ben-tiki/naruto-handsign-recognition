@@ -1,5 +1,5 @@
 # Hand Gesture Recognition with TensorFlow.js, Teachable Machine, and MediaPipe
-This project is a real-time hand gesture recognition system that identifies and classifies nine distinct hand gestures. It utilizes TensorFlow.js for implementing machine learning in JavaScript, Teachable Machine for training the recognition model, and MediaPipe for hand detection in the input frames. The gestures and their associated actions are inspired by the anime "Naruto".
+This project implements a real-time hand gesture recognition system that identifies and classifies nine distinct hand gestures. It utilizes TensorFlow.js for implementing machine learning in JavaScript, Teachable Machine for training the recognition model, and MediaPipe for hand detection in the input frames. The gestures and their associated actions are inspired by the anime "Naruto".
 
 # System Architecture
 The architecture of this project consists of two major components:
